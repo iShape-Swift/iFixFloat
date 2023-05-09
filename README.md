@@ -1,2 +1,3 @@
 # iFixFloat
-Fixed-Float math
+
+A description of this package.
