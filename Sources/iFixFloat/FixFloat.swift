@@ -9,7 +9,7 @@ public extension FixFloat {
     
     static let unit: Int64 = 1 << fractionBits
     static let half: Int64 = 1 << (fractionBits - 1)
-    static let sqrUnit: Int64 = 1 << 2 * fractionBits
+    static let sqrUnit: Int64 = 1 << (2 * fractionBits)
     
     static let pi: FixFloat = 3217
     
@@ -32,7 +32,7 @@ public extension FixFloat {
     var sqrt: FixFloat {
         (self << FixFloat.fractionBits).fastSquareRoot
     }
-    
+
     @inlinable
     var double: Double {
         Double(self) / Double(FixFloat.unit)
@@ -63,6 +63,10 @@ public extension FixFloat {
         self >> FixFloat.fractionBits
     }
 
+    @inlinable
+    func clamp(min: FixFloat, max: FixFloat) -> FixFloat {
+        Swift.min(max, Swift.max(min, self))
+    }
 }
 
 public extension Double {
