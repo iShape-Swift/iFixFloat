@@ -1,15 +1,18 @@
 public typealias FixFloat = Int64
+public typealias FixDouble = Int64
 
 public extension FixFloat {
     
     static let fractionBits: Int64 = 10
+    static let sqrFactionBits: Int64 = 20
     static let maxBits = (Int64.bitWidth >> 1) - 1
     static let max: Int64 = (Int64(1) << maxBits) - 1
     static let min: Int64 = -max
     
     static let unit: Int64 = 1 << fractionBits
+    static let sqrUnit: Int64 = 1 << sqrFactionBits
     static let half: Int64 = 1 << (fractionBits - 1)
-    static let sqrUnit: Int64 = 1 << (2 * fractionBits)
+    
     
     static let pi: FixFloat = 3217
     
@@ -19,8 +22,18 @@ public extension FixFloat {
     }
     
     @inlinable
+    func div(fixDouble value: FixFloat) -> FixFloat {
+        (self << FixFloat.sqrFactionBits) / value
+    }
+    
+    @inlinable
     func mul(_ value: FixFloat) -> FixFloat {
         (self * value).normalize
+    }
+    
+    @inlinable
+    func mul(fixDouble value: FixFloat) -> FixFloat {
+        (self * value).sqrNormalize
     }
 
     @inlinable
