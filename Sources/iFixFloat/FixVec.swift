@@ -14,6 +14,11 @@ public extension FixVec {
     static let zero = FixVec(0, 0)
     
     @inlinable
+    var isZero: Bool {
+        x == 0 && y == 0
+    }
+    
+    @inlinable
     var bitPack: Int64 {
         (x << FixFloat.maxBits) + y
     }
@@ -53,7 +58,15 @@ public extension FixVec {
         
         return FixVec(xx, yy)
     }
-    
+
+    @inlinable
+    func safeNormalize(_ def: FixVec = FixVec(0, .unit)) -> FixVec {
+        guard !self.isZero else {
+            return def
+        }
+        return self.normalize
+    }
+
     @inlinable
     var half: FixVec {
         FixVec(x / 2, y / 2)
@@ -82,6 +95,11 @@ public extension FixVec {
         let y = right.y.mul(left)
         return FixVec(x, y)
     }
+    
+    @inlinable
+    func unsafeMul(_ v: FixFloat) -> FixVec { // cross product
+        FixVec(v * x, v * y)
+    }
 
     @inlinable
     func dotProduct(_ v: FixVec) -> FixFloat { // dot product (cos)
@@ -89,11 +107,26 @@ public extension FixVec {
         let yy = y.mul(v.y)
         return xx + yy
     }
+    
+    @inlinable
+    func unsafeDotProduct(_ v: FixVec) -> FixFloat { // dot product (cos)
+        let xx = x * v.x
+        let yy = y * v.y
+        return xx + yy
+    }
 
     @inlinable
     func crossProduct(_ v: FixVec) -> FixFloat { // cross product
         let a = x.mul(v.y)
         let b = y.mul(v.x)
+
+        return a - b
+    }
+    
+    @inlinable
+    func unsafeCrossProduct(_ v: FixVec) -> FixFloat { // cross product
+        let a = x * v.y
+        let b = y * v.x
 
         return a - b
     }

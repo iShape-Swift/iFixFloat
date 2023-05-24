@@ -5,6 +5,7 @@ public extension FixFloat {
     
     static let fractionBits: Int64 = 10
     static let sqrFactionBits: Int64 = 20
+    static let cubeFactionBits: Int64 = 30
     static let maxBits = (Int64.bitWidth >> 1) - 1
     static let max: Int64 = (Int64(1) << maxBits) - 1
     static let min: Int64 = -max
@@ -80,6 +81,17 @@ public extension FixFloat {
     func clamp(min: FixFloat, max: FixFloat) -> FixFloat {
         Swift.min(max, Swift.max(min, self))
     }
+    
+    @inlinable
+    var invert: FixFloat {
+        (1 << FixFloat.sqrFactionBits) / self
+    }
+
+    @inlinable
+    var doubleInvert: FixDouble {
+        (1 << FixFloat.cubeFactionBits) / self
+    }
+    
 }
 
 public extension Double {
