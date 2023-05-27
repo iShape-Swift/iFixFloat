@@ -145,6 +145,11 @@ public extension FixVec {
     }
     
     @inlinable
+    func distance(_ v: FixVec) -> FixFloat {
+        sqrDistance(v).sqrt
+    }
+    
+    @inlinable
     func middle(_ v: FixVec) -> FixVec {
         let sum = self + v
         return FixVec(sum.x / 2, sum.y / 2)
