@@ -27,7 +27,7 @@ public extension FixVec {
     init(_ x: FixFloat, _ y: FixFloat) {
         self = .init(x: x, y: y)
     }
-    
+
     @inlinable
     var float: Vec {
         Vec(x.float, y.float)
@@ -154,4 +154,5 @@ public extension FixVec {
         let sum = self + v
         return FixVec(sum.x / 2, sum.y / 2)
     }
+
 }
