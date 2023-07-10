@@ -5,7 +5,7 @@
 //  Created by Nail Sharipov on 16.05.2023.
 //
 
-public struct Boundary {
+public struct Boundary: Equatable {
 
     public static let zero = Boundary(min: .zero, max: .zero)
     
