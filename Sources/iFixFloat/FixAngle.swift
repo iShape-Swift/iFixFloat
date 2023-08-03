@@ -18,7 +18,7 @@ public extension FixAngle {
 
     @inlinable
     var radian: Double {
-        Double(self.trim) * Int64.doubleToRadian
+        Double(trim) * Int64.doubleToRadian
     }
     
     @inlinable

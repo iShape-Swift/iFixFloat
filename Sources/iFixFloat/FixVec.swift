@@ -61,10 +61,10 @@ public extension FixVec {
 
     @inlinable
     func safeNormalize(_ def: FixVec = FixVec(0, .unit)) -> FixVec {
-        guard !self.isZero else {
+        guard !isZero else {
             return def
         }
-        return self.normalize
+        return normalize
     }
 
     @inlinable
