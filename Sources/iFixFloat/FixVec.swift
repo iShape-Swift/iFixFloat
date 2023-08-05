@@ -138,7 +138,7 @@ public extension FixVec {
 
         return FixVec(-x0, y0)
     }
-    
+
     @inlinable
     func sqrDistance(_ v: FixVec) -> FixFloat {
         (self &- v).sqrLength
