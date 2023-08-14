@@ -13,42 +13,42 @@ public extension Vec {
     
     static let zero = Vec(0, 0)
     
-    @inlinable
+    @inline(__always)
     var fix: FixVec {
         FixVec(x.fix, y.fix)
     }
     
-    @inlinable
+    @inline(__always)
     var sqrLength: Float {
         simd_length_squared(self)
     }
     
-    @inlinable
+    @inline(__always)
     var length: Float {
         simd_length(self)
     }
 
-    @inlinable
+    @inline(__always)
     var normalize: Vec {
         simd_normalize(self)
     }
      
-    @inlinable
+    @inline(__always)
     static func +(left: Vec, right: Vec) -> Vec {
         Vec(left.x + right.x, left.y + right.y)
     }
 
-    @inlinable
+    @inline(__always)
     static func -(left: Vec, right: Vec) -> Vec {
         Vec(left.x - right.x, left.y - right.y)
     }
 
-    @inlinable
+    @inline(__always)
     func dotProduct(_ v: Vec) -> Float { // dot product (cos)
         simd_dot(self, v)
     }
 
-    @inlinable
+    @inline(__always)
     func crossProduct(_ v: Vec) -> Float { // cross product
         x * v.y - y * v.x
     }

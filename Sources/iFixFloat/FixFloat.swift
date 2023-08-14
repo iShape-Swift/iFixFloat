@@ -20,77 +20,77 @@ public extension FixFloat {
     
     static let pi: FixFloat = 3217
     
-    @inlinable
+    @inline(__always)
     func div(_ value: FixFloat) -> FixFloat {
         (self << FixFloat.fractionBits) / value
     }
     
-    @inlinable
+    @inline(__always)
     func div(fixDouble value: FixFloat) -> FixFloat {
         (self << FixFloat.sqrFactionBits) / value
     }
     
-    @inlinable
+    @inline(__always)
     func mul(_ value: FixFloat) -> FixFloat {
         (self * value).normalize
     }
     
-    @inlinable
+    @inline(__always)
     func mul(fixDouble value: FixFloat) -> FixFloat {
         (self * value).sqrNormalize
     }
 
-    @inlinable
+    @inline(__always)
     var sqr: FixFloat {
         (self * self).fastNormalize
     }
     
-    @inlinable
+    @inline(__always)
     var sqrt: FixFloat {
         (self << FixFloat.fractionBits).fastSquareRoot
     }
 
-    @inlinable
+    @inline(__always)
     var double: Double {
         Double(self) / Double(FixFloat.unit)
     }
     
-    @inlinable
+    @inline(__always)
     var float: Float {
         Float(self) / Float(FixFloat.unit)
     }
 
-    @inlinable
+    @inline(__always)
     var int: Int {
         Int(self >> FixFloat.fractionBits)
     }
     
-    @inlinable
+    @inline(__always)
     var normalize: FixFloat {
         self / .unit
     }
     
-    @inlinable
+    @inline(__always)
     var sqrNormalize: FixFloat {
         self / .sqrUnit
     }
 
-    @inlinable
+    @inline(__always)
     var fastNormalize: FixFloat {
         self >> FixFloat.fractionBits
     }
 
-    @inlinable
+    @inline(__always)
     func clamp(min: FixFloat, max: FixFloat) -> FixFloat {
         Swift.min(max, Swift.max(min, self))
     }
     
-    @inlinable
+    @inline(__always)
     var invert: FixFloat {
         (1 << FixFloat.sqrFactionBits) / self
     }
 
-    @inlinable
+    @inline(__always)
     var doubleInvert: FixDouble {
         (1 << FixFloat.cubeFactionBits) / self
     }
@@ -99,7 +99,7 @@ public extension FixFloat {
 
 public extension Double {
     
-    @inlinable
+    @inline(__always)
     var fix: FixFloat {
         Int64(self * Double(FixFloat.unit))
     }
@@ -107,7 +107,7 @@ public extension Double {
 
 public extension Float {
     
-    @inlinable
+    @inline(__always)
     var fix: FixFloat {
         Int64(self * Float(FixFloat.unit))
     }
@@ -115,7 +115,7 @@ public extension Float {
 
 public extension Int {
     
-    @inlinable
+    @inline(__always)
     var fix: FixFloat {
         Int64(self << FixFloat.fractionBits)
     }
@@ -123,7 +123,7 @@ public extension Int {
 
 extension Int64 {
 
-    @inlinable
+    @inline(__always)
     var fastSquareRoot: Int64 {
         let a = Int64(Double(self).squareRoot())
         let b = a + 1

@@ -16,17 +16,17 @@ public extension FixAngle {
     static let doubleToRadian: Double = Double.pi / 512
     static let floatToAngle: Float = 1024 * 512 / Float.pi
 
-    @inlinable
+    @inline(__always)
     var radian: Double {
         Double(trim) * Int64.doubleToRadian
     }
     
-    @inlinable
+    @inline(__always)
     var trim: FixFloat {
         self & FixAngle.fullRoundMask
     }
     
-    @inlinable
+    @inline(__always)
     var sin: FixFloat {
         let quarter = (self & FixAngle.fullRoundMask) >> 8
         let index = Int(self & FixAngle.indexMask)
@@ -43,7 +43,7 @@ public extension FixAngle {
         }
     }
     
-    @inlinable
+    @inline(__always)
     var cos: FixFloat {
         let quarter = (self & FixAngle.fullRoundMask) >> 8
         let index = Int(self & FixAngle.indexMask)
@@ -60,7 +60,7 @@ public extension FixAngle {
         }
     }
     
-    @inlinable
+    @inline(__always)
     var rotator: FixVec {
         let quarter = (self & FixAngle.fullRoundMask) >> 8
         let index = Int(self & FixAngle.indexMask)
@@ -86,6 +86,7 @@ public extension FixAngle {
         return FixVec(x: cs, y: sn)
     }
 
+    @inline(__always)
     static func value(_ index: Int) -> FixFloat {
         let i = index >> 1
         if index & 1 == 1 {
@@ -99,7 +100,7 @@ public extension FixAngle {
 
 public extension Double {
     
-    @inlinable
+    @inline(__always)
     var fixAngle: FixAngle {
         Int64(self * FixAngle.doubleToAngle) >> 10
     }
@@ -107,7 +108,7 @@ public extension Double {
 
 public extension Float {
     
-    @inlinable
+    @inline(__always)
     var fixAngle: FixAngle {
         Int64(self * FixAngle.floatToAngle) >> 10
     }
@@ -115,12 +116,12 @@ public extension Float {
 
 public extension FixFloat {
     
-    @inlinable
+    @inline(__always)
     var angleToFixAngle: FixAngle {
-        (self / 90) >> 2
+        self / 360
     }
     
-    @inlinable
+    @inline(__always)
     var radToFixAngle: FixAngle {
         (self << 9) / .pi
     }
