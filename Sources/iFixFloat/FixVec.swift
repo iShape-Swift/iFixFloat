@@ -45,6 +45,12 @@ public extension FixVec {
     }
     
     @inline(__always)
+    var unsafeSqrLength: FixFloat {
+        let m = self &* self
+        return m.x + m.y
+    }
+    
+    @inline(__always)
     var length: FixFloat {
         let m = self &* self
         return (m.x + m.y).fastSquareRoot
@@ -139,6 +145,11 @@ public extension FixVec {
         return FixVec(-x0, y0)
     }
 
+    @inline(__always)
+    func unsafeSqrDistance(_ v: FixVec) -> FixFloat {
+        (self &- v).unsafeSqrLength
+    }
+    
     @inline(__always)
     func sqrDistance(_ v: FixVec) -> FixFloat {
         (self &- v).sqrLength
