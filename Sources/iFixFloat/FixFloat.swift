@@ -21,33 +21,33 @@ public extension FixFloat {
     static let pi: FixFloat = 3217
     
     @inline(__always)
-    func div(_ value: FixFloat) -> FixFloat {
+    func fixDiv(_ value: FixFloat) -> FixFloat {
         (self << FixFloat.fractionBits) / value
     }
     
     @inline(__always)
-    func div(fixDouble value: FixFloat) -> FixFloat {
+    func fivDiv(doubleValue value: FixFloat) -> FixFloat {
         (self << FixFloat.sqrFactionBits) / value
     }
     
     @inline(__always)
-    func mul(_ value: FixFloat) -> FixFloat {
-        (self * value).normalize
+    func fixMul(_ value: FixFloat) -> FixFloat {
+        (self * value).fixNormalize
     }
     
     @inline(__always)
-    func mul(fixDouble value: FixFloat) -> FixFloat {
-        (self * value).sqrNormalize
+    func fixMul(doubleValue value: FixFloat) -> FixFloat {
+        (self * value).fixSqrNormalize
     }
 
     @inline(__always)
-    var sqr: FixFloat {
-        (self * self).fastNormalize
+    var fixSqr: FixFloat {
+        (self * self).fixFastNormalize
     }
     
     @inline(__always)
-    var sqrt: FixFloat {
-        (self << FixFloat.fractionBits).fastSquareRoot
+    var fixSqrt: FixFloat {
+        (self << FixFloat.fractionBits).sqrt
     }
 
     @inline(__always)
@@ -66,17 +66,17 @@ public extension FixFloat {
     }
     
     @inline(__always)
-    var normalize: FixFloat {
+    var fixNormalize: FixFloat {
         self / .unit
     }
     
     @inline(__always)
-    var sqrNormalize: FixFloat {
+    var fixSqrNormalize: FixFloat {
         self / .sqrUnit
     }
 
     @inline(__always)
-    var fastNormalize: FixFloat {
+    var fixFastNormalize: FixFloat {
         self >> FixFloat.fractionBits
     }
 
@@ -124,7 +124,7 @@ public extension Int {
 extension Int64 {
 
     @inline(__always)
-    var fastSquareRoot: Int64 {
+    var sqrt: Int64 {
         let a = Int64(Double(self).squareRoot())
         let b = a + 1
 
