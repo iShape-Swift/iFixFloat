@@ -15,8 +15,6 @@ public extension FixFloat {
     static let sqrUnit: Int64 = 1 << sqrFactionBits
     static let cubeUnit: Int64 = 1 << cubeFactionBits
     static let half: Int64 = 1 << (fractionBits - 1)
-    
-    
     static let pi: FixFloat = 3217
     
     @inline(__always)
