@@ -8,9 +8,8 @@ public extension FixFloat {
     static let cubeFactionBits: Int64 = 30
     static let tetraFactionBits: Int64 = 40
     static let pentaFactionBits: Int64 = 50
-    static let maxBits = (Int64.bitWidth >> 1) - 1
-    static let maxFix: Int64 = (Int64(1) << maxBits) - 1
-    static let minFix: Int64 = -max
+    static let fixMax: Int64 = Int64(Int32.max)
+    static let fixMin: Int64 = Int64(Int32.min)
     
     static let unit: Int64 = 1 << fractionBits
     static let sqrUnit: Int64 = 1 << sqrFactionBits

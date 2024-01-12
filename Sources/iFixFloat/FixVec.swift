@@ -17,11 +17,6 @@ public extension FixVec {
     var isZero: Bool {
         x == 0 && y == 0
     }
-    
-    @inline(__always)
-    var bitPack: Int64 {
-        (x << FixFloat.maxBits) + y
-    }
      
     @inline(__always)
     init(_ x: FixFloat, _ y: FixFloat) {
