@@ -22,13 +22,19 @@ public extension FixVec {
 }
 
 public extension BitPack {
+
+    @inlinable
+    var x: Int64 {
+        Int64(self >> UInt32.bitWidth) - FixVec.fixMid
+    }
+    
+    @inlinable
+    var y: Int64 {
+        Int64(self & FixVec.yMask) - FixVec.fixMid
+    }
     
     @inlinable
     var fixVec: FixVec {
-        let x = Int64(self >> UInt32.bitWidth) - FixVec.fixMid
-        let y = Int64(self & FixVec.yMask) - FixVec.fixMid
-        
-        return FixVec(x, y)
+        FixVec(self.x, self.y)
     }
-    
 }

@@ -22,6 +22,11 @@ public extension FixVec {
     init(_ x: FixFloat, _ y: FixFloat) {
         self = .init(x: x, y: y)
     }
+    
+    @inline(__always)
+    init(_ p: Point) {
+        self = .init(x: Int64(p.x), y: Int64(p.y))
+    }
 
     @inline(__always)
     var float: Vec {
