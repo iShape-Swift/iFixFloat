@@ -38,3 +38,14 @@ public extension BitPack {
         FixVec(self.x, self.y)
     }
 }
+
+
+public extension Point {
+    @inlinable
+    var bitPack: UInt64 {
+        let xx = UInt64(Int64(self.x) + FixVec.fixMid) << UInt32.bitWidth
+        let yy = UInt64(Int64(self.y) + FixVec.fixMid)
+
+        return xx | yy
+    }
+}
