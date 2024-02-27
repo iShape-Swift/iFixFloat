@@ -15,5 +15,4 @@ public extension Point {
     init(_ p: FixVec) {
         self = .init(x: Int32(p.x), y: Int32(p.y))
     }
-    
 }

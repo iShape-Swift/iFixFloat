@@ -10,7 +10,14 @@ public struct UInt128 {
     public var high: UInt64
     public var low: UInt64
     
-    private static func sum(_ a: UInt64, _ b: UInt64, _ c: UInt64) -> (partialValue: UInt64, high: UInt64) {
+    @inline(__always)
+    init(high: UInt64, low: UInt64) {
+        self.high = high
+        self.low = low
+    }
+    
+    @inline(__always)
+    static func sum(_ a: UInt64, _ b: UInt64, _ c: UInt64) -> (partialValue: UInt64, high: UInt64) {
         let s0 = a.addingReportingOverflow(b)
         var high: UInt64 = s0.overflow ? 1 : 0
         let s1 = s0.partialValue.addingReportingOverflow(c)
@@ -19,6 +26,7 @@ public struct UInt128 {
         return (s1.partialValue, high)
     }
 
+    @inline(__always)
     public static func multiply(_ a: UInt64, _ b: UInt64) -> UInt128 {
         guard a.leadingZeroBitCount + b.leadingZeroBitCount < UInt64.bitWidth else {
             return UInt128(high: 0, low: a * b)
@@ -39,10 +47,12 @@ public struct UInt128 {
         return UInt128(high: high, low: low)
     }
     
+    @inline(__always)
     public static func == (lhs: UInt128, rhs: UInt128) -> Bool {
         return lhs.high == rhs.high && lhs.low == rhs.low
     }
     
+    @inline(__always)
     public static func < (lhs: UInt128, rhs: UInt128) -> Bool {
         if lhs.high != rhs.high {
             return lhs.high < rhs.high
@@ -50,6 +60,7 @@ public struct UInt128 {
         return lhs.low < rhs.low
     }
     
+    @inline(__always)
     public static func <= (lhs: UInt128, rhs: UInt128) -> Bool {
         if lhs.high != rhs.high {
             return lhs.high < rhs.high
@@ -57,6 +68,7 @@ public struct UInt128 {
         return lhs.low <= rhs.low
     }
     
+    @inline(__always)
     public static func > (lhs: UInt128, rhs: UInt128) -> Bool {
         if lhs.high != rhs.high {
             return lhs.high > rhs.high
@@ -64,6 +76,7 @@ public struct UInt128 {
         return lhs.low > rhs.low
     }
     
+    @inline(__always)
     public static func >= (lhs: UInt128, rhs: UInt128) -> Bool {
         if lhs.high != rhs.high {
             return lhs.high > rhs.high
