@@ -43,17 +43,8 @@ public struct Triangle {
     }
     
     @inline(__always)
-    public static func clockDirection(p0: FixVec, p1: FixVec, p2: FixVec) -> Int {
-        let area = unsafeAreaTwo(p0: p0, p1: p1, p2: p2)
-        if area < 0 {
-            return -1
-        }
-        
-        if area > 0 {
-            return 1
-        }
-        
-        return 0
+    public static func clockDirection(p0: FixVec, p1: FixVec, p2: FixVec) -> Int64 {
+        unsafeAreaTwo(p0: p0, p1: p1, p2: p2).signum()
     }
     
     @inline(__always)
