@@ -63,6 +63,19 @@ public struct Triangle {
         
         return !(has_neg && has_pos)
     }
+
+    @inline(__always)
+    public static func isContain_eclude_borders(p: Point, p0: Point, p1: Point, p2: Point) -> Bool {
+        let q0 = p.subtract(p1).crossProduct(p0.subtract(p1))
+        let q1 = p.subtract(p2).crossProduct(p1.subtract(p2))
+        let q2 = p.subtract(p0).crossProduct(p2.subtract(p0))
+        
+        let has_neg = q0 < 0 || q1 < 0 || q2 < 0
+        let has_pos = q0 > 0 || q1 > 0 || q2 > 0
+        
+        return !(has_neg && has_pos) && q0 != 0 && q1 != 0 && q2 != 0
+    }
+    
     
     @inline(__always)
     public static func isNotContain(p: FixVec, p0: FixVec, p1: FixVec, p2: FixVec) -> Bool {
